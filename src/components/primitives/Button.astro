@@ -1,0 +1,10 @@
+---
+interface Props { href?: string; label: string; kind?: 'primary' | 'secondary' | 'light' }
+const { href = '#', label, kind = 'primary' } = Astro.props;
+const styles = {
+  primary: 'bg-blue-600 text-white hover:bg-blue-700',
+  secondary: 'border border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white',
+  light: 'bg-white text-blue-700 hover:bg-slate-100',
+};
+---
+<a href={href} class={`inline-block px-5 py-3 font-semibold transition ${styles[kind]}`}>{label}</a>

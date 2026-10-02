@@ -24,6 +24,8 @@ The catalogue currently contains **15 implemented block families** and **185 rev
 
 The catalogue intentionally omits Social, Shop and Dividers because they are not needed for this template.
 
+The first reusable component layer is now available at `/components/`. It includes shared primitives (`Container`, `SectionHeading`, `Button`) and typed Astro blocks for features, content splits, CTAs, blog grids, pricing, testimonials, contact forms and footers.
+
 ## Working conventions
 
 - Working project: `/srv/Github/astro-catalogue/`

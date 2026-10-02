@@ -1,0 +1,16 @@
+---
+import Container from '../primitives/Container.astro';
+import Button from '../primitives/Button.astro';
+interface Props { eyebrow?: string; title: string; description?: string; label: string; href?: string; tone?: 'blue' | 'dark' | 'light' }
+const { eyebrow, title, description, label, href = '#', tone = 'blue' } = Astro.props;
+const tones = { blue: 'bg-blue-700 text-white', dark: 'bg-slate-950 text-white', light: 'bg-slate-100 text-slate-950' };
+const buttonKind = tone === 'light' ? 'primary' : 'light';
+---
+<section class={`py-20 ${tones[tone]}`}>
+  <Container class="text-center">
+    {eyebrow && <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] opacity-75">{eyebrow}</p>}
+    <h2 class="mx-auto max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl">{title}</h2>
+    {description && <p class="mx-auto mt-5 max-w-2xl leading-7 opacity-80">{description}</p>}
+    <div class="mt-8"><Button href={href} label={label} kind={buttonKind} /></div>
+  </Container>
+</section>

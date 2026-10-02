@@ -20,6 +20,7 @@ export const siteNavigation: SiteNavItem[] = [
   { label: 'Columns', href: '/columns/' },
   { label: 'Partners', href: '/partners/' },
   { label: 'Forms', href: '/forms/' },
+  { label: 'Components', href: '/components/' },
 ];
 
 export const siteNavCta = {
