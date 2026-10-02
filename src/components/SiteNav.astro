@@ -1,0 +1,81 @@
+---
+import { siteNavigation, siteNavCta, type SiteNavItem } from '../data/siteNavigation';
+
+interface Props {
+  brand?: string;
+  items?: SiteNavItem[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  brand = 'Company',
+  items = siteNavigation,
+  ctaLabel = siteNavCta.label,
+  ctaHref = siteNavCta.href,
+} = Astro.props;
+---
+<header class="bg-white">
+  <nav class="container mx-auto flex flex-wrap items-center px-4 py-5" aria-label="Primary navigation">
+    <a href="/" class="mr-auto text-xl font-medium uppercase text-blue-600 hover:text-blue-800">{brand}</a>
+
+    <button
+      type="button"
+      class="rounded-xs px-3 py-2 text-blue-600 hover:bg-blue-600 hover:text-white lg:hidden"
+      data-nav-toggler
+      aria-expanded="false"
+      aria-controls="site-nav-menu"
+      aria-label="Open navigation menu"
+    >
+      <span class="block my-1 w-6 border-b-2 border-current"></span>
+      <span class="block my-1 w-6 border-b-2 border-current"></span>
+      <span class="block my-1 w-6 border-b-2 border-current"></span>
+    </button>
+
+    <div
+      id="site-nav-menu"
+      class="hidden w-full max-w-full space-y-2 lg:flex lg:w-auto lg:flex-wrap lg:items-center lg:justify-end lg:space-x-2 lg:space-y-0"
+      data-nav-menu
+    >
+      <div class="flex flex-col lg:flex-row">
+        {items.map((item) => (
+          <a href={item.href} class="px-0 py-2 font-light uppercase hover:text-blue-600 lg:px-4">{item.label}</a>
+        ))}
+      </div>
+      <a href={ctaHref} class="inline-block rounded-xs bg-blue-600 px-5 py-2 font-light uppercase text-white hover:bg-blue-700">{ctaLabel}</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const nav = document.querySelector('[data-nav-toggler]')?.closest('header');
+
+  if (nav) {
+    const toggler = nav.querySelector<HTMLButtonElement>('[data-nav-toggler]');
+    const menu = nav.querySelector<HTMLElement>('[data-nav-menu]');
+
+    if (toggler && menu) {
+      const setOpen = (open: boolean) => {
+        menu.classList.toggle('hidden', !open);
+        toggler.setAttribute('aria-expanded', String(open));
+        toggler.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      };
+
+      toggler.addEventListener('click', () => {
+        setOpen(toggler.getAttribute('aria-expanded') !== 'true');
+      });
+
+      menu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setOpen(false));
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setOpen(false);
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.matchMedia('(min-width: 1024px)').matches) setOpen(false);
+      });
+    }
+  }
+</script>

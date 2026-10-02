@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { headerVariants } from '../../data/headerVariants';
+---
+<BaseLayout
+  title="Header Catalogue | Astro Starter"
+  description="Structural Header and Navigation variants for the Astro and Tailwind starter."
+>
+  <main>
+    <header class="border-b border-slate-200 bg-slate-950 text-white">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <a class="text-xs font-semibold uppercase tracking-[0.24em] text-sky-300" href="/">← Block library</a>
+        <div class="max-w-3xl">
+          <p class="mt-8 text-xs font-semibold uppercase tracking-[0.24em] text-sky-300">Astro + Tailwind starter</p>
+          <h1 class="mt-4 font-display text-4xl leading-tight tracking-tight sm:text-6xl">Header and navigation catalogue</h1>
+          <p class="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+            Structural variants imported from the Pinegrow Tailwind 4 project. This is a review surface, not a finished design system.
+          </p>
+        </div>
+        <div class="mt-10 flex flex-wrap items-center gap-3 text-sm text-slate-300">
+          <span class="rounded-full border border-slate-700 px-4 py-2">{headerVariants.length} variants</span>
+          <span class="rounded-full border border-slate-700 px-4 py-2">Tailwind 4.2.2 source</span>
+          <span class="rounded-full border border-slate-700 px-4 py-2">Raw structure, no redesign</span>
+          <a class="rounded-full bg-sky-300 px-4 py-2 font-semibold text-slate-950 transition hover:bg-white" href="/heroes/">View hero catalogue →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-8" aria-labelledby="catalogue-heading">
+      <div class="mb-10 flex flex-col gap-3 border-b border-slate-300 pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Component review</p>
+          <h2 id="catalogue-heading" class="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Available navigation structures</h2>
+        </div>
+        <p class="max-w-md text-sm leading-6 text-slate-600">Choose structure first. We will convert interaction behaviour and apply project-specific design after the family has been reviewed.</p>
+      </div>
+
+      <div class="space-y-10">
+        {headerVariants.map((variant, index) => (
+          <article class="overflow-hidden rounded-2xl border border-slate-300 bg-white shadow-sm" id={variant.id}>
+            <div class="flex flex-col gap-3 border-b border-slate-200 bg-slate-50 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">{String(index + 1).padStart(2, '0')} · {variant.id}</p>
+                <h3 class="mt-1 text-lg font-semibold text-slate-950">{variant.title}</h3>
+              </div>
+              <p class="max-w-xl text-sm leading-6 text-slate-600">{variant.description}</p>
+            </div>
+            <div class="catalogue-preview overflow-hidden bg-white" set:html={variant.html} />
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

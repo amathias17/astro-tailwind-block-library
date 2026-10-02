@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: Georgia, 'Times New Roman', serif;
+}
+
+:root {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: #172554;
+  color: #f8fafc;
+}
+
+.catalogue-preview :where(header) {
+  isolation: isolate;
+}
+
+.catalogue-preview :where(svg) {
+  max-width: none;
+}

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { featureVariants } from '../../data/featuresVariants';
+---
+<BaseLayout
+  title="Features & Services Catalogue | Astro Starter"
+  description="Structural features and services variants for the Astro and Tailwind starter."
+>
+  <main>
+    <header class="border-b border-slate-200 bg-slate-950 text-white">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <a class="text-xs font-semibold uppercase tracking-[0.24em] text-sky-300" href="/">← Block library</a>
+        <div class="max-w-3xl">
+          <p class="mt-8 text-xs font-semibold uppercase tracking-[0.24em] text-sky-300">Astro + Tailwind starter</p>
+          <h1 class="mt-4 font-display text-4xl leading-tight tracking-tight sm:text-6xl">Features &amp; services catalogue</h1>
+          <p class="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+            Structural feature and service variants imported from the Pinegrow Tailwind project. Compare grid, split, card and interactive treatments before choosing a direction.
+          </p>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-3 text-sm text-slate-300">
+          <span class="rounded-full border border-slate-700 px-4 py-2">{featureVariants.length} variants</span>
+          <span class="rounded-full border border-slate-700 px-4 py-2">Tailwind source</span>
+          <span class="rounded-full border border-slate-700 px-4 py-2">Raw structure, no redesign</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-8" aria-labelledby="catalogue-heading">
+      <div class="mb-10 flex flex-col gap-3 border-b border-slate-300 pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Component review</p>
+          <h2 id="catalogue-heading" class="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Available feature structures</h2>
+        </div>
+        <p class="max-w-md text-sm leading-6 text-slate-600">The source contains repeated service content in different compositions. This page keeps those layout decisions visible for review.</p>
+      </div>
+
+      <div class="space-y-10">
+        {featureVariants.map((variant, index) => (
+          <article class="overflow-hidden rounded-2xl border border-slate-300 bg-white shadow-sm" id={variant.id}>
+            <div class="flex flex-col gap-3 border-b border-slate-200 bg-slate-50 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">{String(index + 1).padStart(2, '0')} · {variant.id}</p>
+                <h3 class="mt-1 text-lg font-semibold text-slate-950">{variant.title}</h3>
+              </div>
+              <p class="max-w-xl text-sm leading-6 text-slate-600">{variant.description}</p>
+            </div>
+            <div class="catalogue-preview overflow-hidden bg-white" set:html={variant.html} />
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
