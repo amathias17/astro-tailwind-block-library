@@ -1,6 +1,27 @@
 ---
 import Container from '../primitives/Container.astro';
-interface Props { title: string; description?: string; action?: string }
-const { title, description, action = '#' } = Astro.props;
+import type { ContactFormMode } from './types';
+type Props = { title: string; description?: string } & ContactFormMode;
+const { title, description, mode, action } = Astro.props;
 ---
-<section class="bg-surface-muted py-section"><Container><div class="grid gap-10 lg:grid-cols-2 lg:items-start"><div><h2 class="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{title}</h2>{description && <p class="mt-5 max-w-xl leading-8 text-body">{description}</p>}</div><form action={action} method="post" class="rounded-ui bg-surface p-8 shadow-panel"><div class="grid gap-4 sm:grid-cols-2"><label class="text-sm font-semibold text-ink">Name<input name="name" required class="mt-2 w-full border border-border-strong p-3" /></label><label class="text-sm font-semibold text-ink">Email<input name="email" type="email" required class="mt-2 w-full border border-border-strong p-3" /></label></div><label class="mt-4 block text-sm font-semibold text-ink">Message<textarea name="message" required class="mt-2 min-h-36 w-full border border-border-strong p-3"></textarea></label><button type="submit" class="mt-5 bg-brand px-5 py-3 font-semibold text-on-dark hover:bg-brand-hover">Send message</button></form></div></Container></section>
+<section class="bg-surface-muted py-section">
+  <Container>
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+      <div>
+        <h2 class="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{title}</h2>
+        {description && <p class="mt-5 max-w-xl leading-8 text-body">{description}</p>}
+      </div>
+      <form action={mode === 'submit' ? action : undefined} method={mode === 'submit' ? 'post' : undefined} data-form-mode={mode} class="rounded-ui bg-surface p-8 shadow-panel">
+        {mode === 'demo' && <p class="mb-5 text-sm font-medium text-body">Form preview only. Submission is disabled until you configure an endpoint.</p>}
+        <fieldset disabled={mode === 'demo'}>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="text-sm font-semibold text-ink">Name<input name="name" autocomplete="name" required class="mt-2 w-full rounded-ui border border-border-strong p-3" /></label>
+            <label class="text-sm font-semibold text-ink">Email<input name="email" type="email" autocomplete="email" required class="mt-2 w-full rounded-ui border border-border-strong p-3" /></label>
+          </div>
+          <label class="mt-4 block text-sm font-semibold text-ink">Message<textarea name="message" required class="mt-2 min-h-36 w-full rounded-ui border border-border-strong p-3"></textarea></label>
+          <button type="submit" class="mt-5 rounded-ui bg-brand px-5 py-3 font-semibold text-on-dark hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-50">Send message</button>
+        </fieldset>
+      </form>
+    </div>
+  </Container>
+</section>

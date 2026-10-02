@@ -1,6 +1,19 @@
 ---
 import Container from '../primitives/Container.astro';
-interface Props { brand?: string; description?: string }
-const { brand = 'Studio.', description = 'Making useful things for thoughtful people.' } = Astro.props;
+import type { FooterLink } from './types';
+interface Props { brand: string; brandHref?: string; description?: string; links?: FooterLink[]; contactEmail?: string; copyright?: string }
+const { brand, brandHref = '/', description, links = [], contactEmail, copyright } = Astro.props;
 ---
-<footer class="bg-surface-dark py-section text-on-dark-muted"><Container><div class="grid gap-8 md:grid-cols-3"><div><a href="/" class="text-2xl font-bold text-on-dark">{brand}</a><p class="mt-4 max-w-xs leading-7">{description}</p></div><div><h2 class="font-semibold text-on-dark">Explore</h2><ul class="mt-4 space-y-2"><li><a href="#" class="hover:text-on-dark">About</a></li><li><a href="#" class="hover:text-on-dark">Work</a></li><li><a href="#" class="hover:text-on-dark">Contact</a></li></ul></div><div><h2 class="font-semibold text-on-dark">Connect</h2><p class="mt-4">hello@example.com</p></div></div><div class="mt-12 border-t border-border-strong pt-6 text-sm">© 2026 {brand} All rights reserved.</div></Container></footer>
+<footer class="bg-surface-dark py-section text-on-dark-muted">
+  <Container>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div>
+        <a href={brandHref} class="text-2xl font-bold text-on-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">{brand}</a>
+        {description && <p class="mt-4 max-w-xs leading-7">{description}</p>}
+      </div>
+      {links.length > 0 && <nav aria-label="Footer navigation"><h2 class="font-semibold text-on-dark">Explore</h2><ul class="mt-4 space-y-2">{links.map((link) => <li><a href={link.href} class="hover:text-on-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">{link.label}</a></li>)}</ul></nav>}
+      {contactEmail && <div><h2 class="font-semibold text-on-dark">Connect</h2><a class="mt-4 inline-block hover:text-on-dark" href={`mailto:${contactEmail}`}>{contactEmail}</a></div>}
+    </div>
+    {copyright && <div class="mt-12 border-t border-border-strong pt-6 text-sm">{copyright}</div>}
+  </Container>
+</footer>

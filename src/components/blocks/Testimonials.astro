@@ -1,7 +1,7 @@
 ---
 import Container from '../primitives/Container.astro';
-interface Testimonial { quote: string; name: string; role: string }
-interface Props { title: string; testimonials: Testimonial[]; tone?: 'light' | 'dark' }
+import type { TestimonialItem } from './types';
+interface Props { title: string; testimonials: TestimonialItem[]; tone?: 'light' | 'dark' }
 const { title, testimonials, tone = 'light' } = Astro.props;
 const dark = tone === 'dark';
 ---

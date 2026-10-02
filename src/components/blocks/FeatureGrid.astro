@@ -1,8 +1,8 @@
 ---
 import Container from '../primitives/Container.astro';
 import SectionHeading from '../primitives/SectionHeading.astro';
-interface Feature { title: string; description: string; icon?: string }
-interface Props { eyebrow?: string; title: string; description?: string; items: Feature[]; columns?: 2 | 3 | 4 }
+import type { FeatureItem } from './types';
+interface Props { eyebrow?: string; title: string; description?: string; items: FeatureItem[]; columns?: 2 | 3 | 4 }
 const { eyebrow, title, description, items, columns = 3 } = Astro.props;
 const grid = { 2: 'md:grid-cols-2', 3: 'md:grid-cols-3', 4: 'sm:grid-cols-2 lg:grid-cols-4' }[columns];
 ---

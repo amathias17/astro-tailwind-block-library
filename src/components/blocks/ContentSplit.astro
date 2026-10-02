@@ -1,8 +1,9 @@
 ---
 import Container from '../primitives/Container.astro';
 import Button from '../primitives/Button.astro';
-interface Props { eyebrow?: string; title: string; description: string; image: string; imageAlt?: string; reverse?: boolean; href?: string }
-const { eyebrow, title, description, image, imageAlt = '', reverse = false, href = '#' } = Astro.props;
+import type { LinkAction } from './types';
+interface Props { eyebrow?: string; title: string; description: string; image: string; imageAlt: string; reverse?: boolean; action?: LinkAction }
+const { eyebrow, title, description, image, imageAlt, reverse = false, action } = Astro.props;
 ---
 <section class="bg-surface-muted py-section">
   <Container>
@@ -12,7 +13,7 @@ const { eyebrow, title, description, image, imageAlt = '', reverse = false, href
         {eyebrow && <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand">{eyebrow}</p>}
         <h2 class="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{title}</h2>
         <p class="mt-5 max-w-xl leading-8 text-body">{description}</p>
-        <div class="mt-7"><Button href={href} label="Read more" /></div>
+        {action && <div class="mt-7"><Button href={action.href} label={action.label} /></div>}
       </div>
     </div>
   </Container>

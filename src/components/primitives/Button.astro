@@ -1,10 +1,10 @@
 ---
-interface Props { href?: string; label: string; kind?: 'primary' | 'secondary' | 'light' }
-const { href = '#', label, kind = 'primary' } = Astro.props;
+interface Props { href: string; label: string; kind?: 'primary' | 'secondary' | 'light' }
+const { href, label, kind = 'primary' } = Astro.props;
 const styles = {
   primary: 'bg-brand text-on-dark hover:bg-brand-hover',
   secondary: 'border border-brand text-brand-strong hover:bg-brand hover:text-on-dark',
   light: 'bg-surface text-brand-strong hover:bg-surface-subtle',
 };
 ---
-<a href={href} class={`inline-block rounded-ui px-5 py-3 font-semibold transition ${styles[kind]}`}>{label}</a>
+<a href={href} class={`inline-block rounded-ui px-5 py-3 font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${styles[kind]}`}>{label}</a>

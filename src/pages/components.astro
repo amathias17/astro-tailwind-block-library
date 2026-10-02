@@ -15,9 +15,9 @@ const features = [
   { title: 'Easy to adapt', description: 'Change the content and visual direction without rebuilding the block.' },
 ];
 const posts = [
-  { title: 'Designing for clarity', excerpt: 'A short note about making important ideas easier to understand.', date: '12 May 2026', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80' },
-  { title: 'A better way to begin', excerpt: 'Why choosing structure before decoration saves time later.', date: '08 May 2026', image: 'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=900&q=80' },
-  { title: 'Useful by default', excerpt: 'Small decisions that help a site feel considered from the start.', date: '02 May 2026', image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80' },
+  { title: 'Designing for clarity', excerpt: 'A short note about making important ideas easier to understand.', date: '12 May 2026', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80', imageAlt: 'Open notebook and pen on a desk' },
+  { title: 'A better way to begin', excerpt: 'Why choosing structure before decoration saves time later.', date: '08 May 2026', image: 'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=900&q=80', imageAlt: 'Open journal and writing materials' },
+  { title: 'Useful by default', excerpt: 'Small decisions that help a site feel considered from the start.', date: '02 May 2026', image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80', imageAlt: 'Person working on a laptop at a desk' },
 ];
 const plans = [
   { name: 'Starter', price: '$19', description: 'For getting started.', features: ['Core blocks', 'Email support'] },
@@ -34,12 +34,12 @@ const testimonials = [
   <main>
     <header class="border-b border-slate-200 bg-slate-950 text-white"><div class="mx-auto max-w-7xl px-6 py-16 lg:px-8"><a class="text-xs font-semibold uppercase tracking-[0.24em] text-sky-300" href="/">← Block library</a><div class="max-w-3xl"><p class="mt-8 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300">Reusable Astro components</p><h1 class="mt-4 font-display text-4xl leading-tight tracking-tight sm:text-6xl">Component showcase</h1><p class="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">These examples render the first reusable Astro component layer. The original catalogue remains available as the visual reference library.</p></div><div class="mt-10 flex flex-wrap gap-3 text-sm text-slate-300"><span class="rounded-full border border-slate-700 px-4 py-2">3 primitives</span><span class="rounded-full border border-slate-700 px-4 py-2">8 blocks</span><span class="rounded-full border border-slate-700 px-4 py-2">Typed props</span></div></div></header>
     <FeatureGrid eyebrow="FeatureGrid.astro" title="Build from useful structure" description="A reusable feature block driven by an array of typed items." items={features} />
-    <ContentSplit eyebrow="ContentSplit.astro" title="Keep the visual system separate from the page content" description="The component controls the composition while the page supplies the story, image and action." image="https://images.unsplash.com/photo-1488998527040-85054a85150e?auto=format&fit=crop&w=900&q=80" />
+    <ContentSplit eyebrow="ContentSplit.astro" title="Keep the visual system separate from the page content" description="The component controls the composition while the page supplies the story, image and action." image="https://images.unsplash.com/photo-1488998527040-85054a85150e?auto=format&fit=crop&w=900&q=80" imageAlt="Notebook and pen on a worktable" action={{ label: 'Explore patterns', href: '/features/' }} />
     <BlogGrid title="BlogGrid.astro" description="A reusable editorial grid with typed post data." posts={posts} />
     <PricingTable title="PricingTable.astro" description="Plans are data. The layout remains reusable." plans={plans} />
     <Testimonials title="Testimonials.astro" testimonials={testimonials} />
-    <ContactForm title="ContactForm.astro" description="Production-oriented form markup with labels, names and required fields." />
-    <CallToAction eyebrow="CallToAction.astro" title="Choose a structure, then make it yours" description="This CTA accepts a tone, label and destination without duplicating the section markup." label="Start building" />
-    <SiteFooter />
+    <ContactForm title="ContactForm.astro" description="Accessible form markup. This showcase is intentionally non-submitting until an endpoint is configured." mode="demo" />
+    <CallToAction eyebrow="CallToAction.astro" title="Choose a structure, then make it yours" description="This CTA accepts a tone, label and destination without duplicating the section markup." label="Start building" href="/" />
   </main>
+  <SiteFooter brand="Block Library" description="Reusable Astro structures and a visual reference catalogue." links={[{ label: 'Catalogue', href: '/' }, { label: 'Components', href: '/components/' }]} />
 </BaseLayout>

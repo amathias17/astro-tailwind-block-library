@@ -12,9 +12,10 @@ npm ci
 npm run dev
 npm run check
 npm run build
+npm test
 ```
 
-Requires Node.js **22.12 or newer**. `npm run dev` serves the site locally; `npm run build` produces static output in `dist/`. GitHub Actions runs the install, check and build steps on pushes and pull requests. Deploy `dist/` to a static host, or use an Astro adapter if you later need server functionality.
+Requires Node.js **22.12 or newer**. `npm run dev` serves the site locally; `npm run build` produces static output in `dist/`. `npm test` checks the built component showcase. GitHub Actions runs the install, check, build and test steps on pushes and pull requests. Deploy `dist/` to a static host, or use an Astro adapter if you later need server functionality.
 
 ## Make a page
 
@@ -34,7 +35,7 @@ const features = [
 <CallToAction title="Talk to us" label="Get in touch" href="/contact/" />
 ```
 
-`/components/` demonstrates eight working blocks: `FeatureGrid`, `ContentSplit`, `BlogGrid`, `PricingTable`, `Testimonials`, `ContactForm`, `CallToAction`, and `SiteFooter`. The three primitives are `Container`, `SectionHeading`, and `Button`. The showcase contains sample copy, pricing, links and remote images. Replace them in a real site.
+`/components/` demonstrates eight blocks: `FeatureGrid`, `ContentSplit`, `BlogGrid`, `PricingTable`, `Testimonials`, `ContactForm`, `CallToAction`, and `SiteFooter`. The three primitives are `Container`, `SectionHeading`, and `Button`. Read the [component API guide](docs/components.md) for props, usage examples and form limitations. The showcase contains sample copy, pricing and remote images. Replace them in a real site.
 
 ## Customise the visual system
 
@@ -44,9 +45,9 @@ Edit the semantic Tailwind 4 `@theme` values in `src/styles/global.css`: `brand`
 
 ## Before using the components in production
 
-- `ContactForm` currently demonstrates HTML structure only. Its default POST target is `#` and there is **no server endpoint or delivery service**. Connect a real action/handler and verify submission before publishing it.
-- Some example links point to `#`; `SiteFooter` includes example contact information and a fixed copyright line. Replace all demo content, destinations and images.
-- Choose appropriate alt text for content images, test keyboard access and validate forms against a real integration. API and accessibility hardening are planned for a later phase.
+- `ContactForm mode="demo"` is visibly disabled and cannot submit. `mode="submit"` requires an endpoint, but **does not implement delivery**. Integrate a real backend or form service and verify success/error handling before publishing it.
+- Links, footer content and image descriptions must be supplied by each real site. No placeholder destination or contact details are emitted by the reusable components by default.
+- Replace the remote showcase photos with appropriately licensed project imagery. Test the finished page with keyboard and assistive technologies; component-level checks do not certify a complete site as accessible.
 
 ## Catalogue and provenance
 

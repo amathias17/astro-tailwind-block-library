@@ -1,8 +1,8 @@
 ---
 import Container from '../primitives/Container.astro';
 import Button from '../primitives/Button.astro';
-interface Props { eyebrow?: string; title: string; description?: string; label: string; href?: string; tone?: 'blue' | 'dark' | 'light' }
-const { eyebrow, title, description, label, href = '#', tone = 'blue' } = Astro.props;
+interface Props { eyebrow?: string; title: string; description?: string; label: string; href: string; tone?: 'blue' | 'dark' | 'light' }
+const { eyebrow, title, description, label, href, tone = 'blue' } = Astro.props;
 const tones = { blue: 'bg-brand-strong text-on-dark', dark: 'bg-surface-dark text-on-dark', light: 'bg-surface-subtle text-ink' };
 const buttonKind = tone === 'light' ? 'primary' : 'light';
 ---
