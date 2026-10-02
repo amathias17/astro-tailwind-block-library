@@ -20,9 +20,6 @@ export const blockCategories: BlockCategory[] = [
   { label: 'Contacts', description: 'Contact details, forms and location blocks.', href: '/contact/', count: 14, accent: 'teal' },
   { label: 'Footers', description: 'Closing navigation and site information.', href: '/footers/', count: 4, accent: 'slate' },
   { label: 'Columns', description: 'Reusable grid and column arrangements.', href: '/columns/', count: 20, accent: 'blue' },
-  { label: 'Social', description: 'Social links and community touchpoints.', accent: 'fuchsia' },
   { label: 'Partners', description: 'Logos, affiliations and trusted-by sections.', href: '/partners/', count: 7, accent: 'yellow' },
   { label: 'Forms', description: 'Inputs, sign-up flows and enquiry layouts.', href: '/forms/', count: 7, accent: 'green' },
-  { label: 'Shop', description: 'Product, collection and commerce structures.', accent: 'red' },
-  { label: 'Dividers', description: 'Visual transitions and section separators.', accent: 'gray' },
 ];

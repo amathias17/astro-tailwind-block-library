@@ -4,7 +4,7 @@ A standalone Astro catalogue of reusable website structures. The Pinegrow projec
 
 ## Current status
 
-The catalogue currently contains **18 block families**, with **15 implemented families** and **185 reviewed variants**:
+The catalogue currently contains **15 implemented block families** and **185 reviewed variants**:
 
 - Headers: 14
 - Heroes: 11
@@ -22,7 +22,7 @@ The catalogue currently contains **18 block families**, with **15 implemented fa
 - Partners: 7
 - Forms: 7
 
-Remaining families are Social, Shop and Dividers. Add each as a data file under `src/data/`, a route under `src/pages/<category>/index.astro`, a shared navigation entry, and a home-page category link/count.
+The catalogue intentionally omits Social, Shop and Dividers because they are not needed for this template.
 
 ## Working conventions
 
