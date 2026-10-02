@@ -3,10 +3,10 @@ import Container from '../primitives/Container.astro';
 import Button from '../primitives/Button.astro';
 interface Props { eyebrow?: string; title: string; description?: string; label: string; href?: string; tone?: 'blue' | 'dark' | 'light' }
 const { eyebrow, title, description, label, href = '#', tone = 'blue' } = Astro.props;
-const tones = { blue: 'bg-blue-700 text-white', dark: 'bg-slate-950 text-white', light: 'bg-slate-100 text-slate-950' };
+const tones = { blue: 'bg-brand-strong text-on-dark', dark: 'bg-surface-dark text-on-dark', light: 'bg-surface-subtle text-ink' };
 const buttonKind = tone === 'light' ? 'primary' : 'light';
 ---
-<section class={`py-20 ${tones[tone]}`}>
+<section class={`py-section ${tones[tone]}`}>
   <Container class="text-center">
     {eyebrow && <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] opacity-75">{eyebrow}</p>}
     <h2 class="mx-auto max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl">{title}</h2>

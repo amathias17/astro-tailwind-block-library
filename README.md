@@ -1,53 +1,55 @@
 # Astro + Tailwind Block Library
 
-A standalone Astro catalogue of reusable website structures. The Pinegrow project at `/srv/Github/PG PROJECT/` is reference-only. Do not modify it when adding catalogue work.
+A starter for building websites with Astro and Tailwind CSS 4. It has two deliberately separate layers:
 
-## Current status
+- **Reference catalogue:** 15 families and 185 visual block examples under routes such as `/heroes/`, `/features/` and `/forms/`. These are previews for choosing a composition, not production-ready components.
+- **Reusable components:** a smaller, typed set under `src/components/blocks/` and `src/components/primitives/`, demonstrated at `/components/`. Build sites from these and adapt them to the project.
 
-The catalogue currently contains **15 implemented block families** and **185 reviewed variants**:
-
-- Headers: 14
-- Heroes: 11
-- CTA: 9
-- Features & Services: 20
-- Content: 20
-- Blog Posts: 22
-- Counters: 10
-- Pricing: 6
-- Team: 11
-- Testimonials: 10
-- Contact: 14
-- Footers: 4
-- Columns: 20
-- Partners: 7
-- Forms: 7
-
-The catalogue intentionally omits Social, Shop and Dividers because they are not needed for this template.
-
-The first reusable component layer is now available at `/components/`. It includes shared primitives (`Container`, `SectionHeading`, `Button`) and typed Astro blocks for features, content splits, CTAs, blog grids, pricing, testimonials, contact forms and footers.
-
-## Working conventions
-
-- Working project: `/srv/Github/astro-catalogue/`
-- Reference project: `/srv/Github/PG PROJECT/`
-- Dev server should bind to `0.0.0.0` for Tailscale access.
-- Preserve the shared catalogue shell, numbered preview labels and responsive layout checks.
-- Validate every change with:
+Use GitHub's **Use this template** button to make a new repository, then run:
 
 ```sh
-npm run astro -- check
-npm run build
-```
-
-- Browser-check the new route at desktop width and 390px mobile width. Confirm the expected variant count, navigation link and no horizontal overflow.
-- Use the existing shared navigation in `src/data/siteNavigation.ts` and category metadata in `src/data/blockCategories.ts`.
-- Structural previews are intentionally catalogue examples, not finished production components. Add proper accessible labels when promoting preview forms into real UI.
-
-## Commands
-
-```sh
-npm install
+npm ci
 npm run dev
+npm run check
 npm run build
-npm run astro -- check
 ```
+
+Requires Node.js **22.12 or newer**. `npm run dev` serves the site locally; `npm run build` produces static output in `dist/`. GitHub Actions runs the install, check and build steps on pushes and pull requests. Deploy `dist/` to a static host, or use an Astro adapter if you later need server functionality.
+
+## Make a page
+
+Import a few blocks into an Astro page. Their required props are checked by Astro:
+
+```astro
+---
+import FeatureGrid from '../components/blocks/FeatureGrid.astro';
+import CallToAction from '../components/blocks/CallToAction.astro';
+
+const features = [
+  { title: 'Fast', description: 'A concise benefit, written for your audience.' },
+  { title: 'Flexible', description: 'The section adapts to your own content.' },
+];
+---
+<FeatureGrid title="What we do" items={features} columns={2} />
+<CallToAction title="Talk to us" label="Get in touch" href="/contact/" />
+```
+
+`/components/` demonstrates eight working blocks: `FeatureGrid`, `ContentSplit`, `BlogGrid`, `PricingTable`, `Testimonials`, `ContactForm`, `CallToAction`, and `SiteFooter`. The three primitives are `Container`, `SectionHeading`, and `Button`. The showcase contains sample copy, pricing, links and remote images. Replace them in a real site.
+
+## Customise the visual system
+
+Edit the semantic Tailwind 4 `@theme` values in `src/styles/global.css`: `brand`, `brand-hover`, `brand-strong`, `brand-soft`, `surface`, `surface-muted`, `surface-dark`, `ink`, `body`, `border`, `font-display`, `font-body`, `spacing-section`, `radius-ui`, and `shadow-panel`. Reusable blocks use these utilities (`bg-brand`, `text-ink`, `py-section`, and so on). The catalogue previews retain their original reference styling intentionally, so changing theme tokens affects the production components but not every preview.
+
+`src/data/siteNavigation.ts` controls the catalogue navigation; `src/data/blockCategories.ts` controls home-page categories and counts. Do not mistake these catalogue-specific items for a finished client-site navigation system.
+
+## Before using the components in production
+
+- `ContactForm` currently demonstrates HTML structure only. Its default POST target is `#` and there is **no server endpoint or delivery service**. Connect a real action/handler and verify submission before publishing it.
+- Some example links point to `#`; `SiteFooter` includes example contact information and a fixed copyright line. Replace all demo content, destinations and images.
+- Choose appropriate alt text for content images, test keyboard access and validate forms against a real integration. API and accessibility hardening are planned for a later phase.
+
+## Catalogue and provenance
+
+The catalogue arose from studying Pinegrow's Tailwind block library. The local Pinegrow reference project is **not part of this repository**. This project does not require Pinegrow at runtime. Social, Shop and Dividers are deliberately outside this template's scope. When promoting a reference layout into a reusable component, document which variant inspired it, rather than copying all examples into the API.
+
+The [MIT licence](LICENSE) covers original code and documentation contributed to this repository. It does not grant rights to third-party trademarks, photographs, or any underlying third-party material. Confirm applicable rights before redistributing or using external reference designs or images in a client project.
