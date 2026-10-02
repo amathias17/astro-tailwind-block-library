@@ -10,6 +10,8 @@ This is the small **reusable** layer, not a promise to implement every catalogue
 
 ## Blocks
 
+- `SiteHeader`: required `brand` and `links: HeaderLink[]` (`label`, `href`); optional `brandHref` (defaults to `/`), `action: { label, href }`, and `menuId` (defaults to `site-menu`; provide a unique ID if more than one header could appear). The accessible mobile menu opens, closes, and responds to Escape and navigation link clicks. Put it outside `<main>`.
+- `Hero`: required `title`, `description`, and `primary: { label, href }`; optional `eyebrow`, `secondary`, and `variant` (`editorial` or `centered`). Renders the page's `h1`, so use it once per page. The two variants change alignment, not the content contract.
 - `FeatureGrid`: required `title` and `items: FeatureItem[]` (`title`, `description`, optional `icon`); optional `eyebrow`, `description`, and `columns` (2, 3, or 4). The numeric fallback is a visible marker, not an icon font.
 - `ContentSplit`: required `title`, `description`, `image`, and `imageAlt`; optional `eyebrow`, `reverse`, and `action: { label, href }`. Use `imageAlt=""` **only** if the image is truly decorative. No button is rendered without an action.
 - `CallToAction`: required `title`, `label`, and `href`; optional `eyebrow`, `description`, and `tone` (`blue`, `dark`, `light`). `blue` uses the semantic brand colour.
@@ -43,3 +45,5 @@ For a working form, replace `mode="demo"` with `mode="submit" action="/your-work
 ## Composition rules
 
 These components intentionally use props for structured text and arrays rather than arbitrary HTML strings. The only current slot is the `Container` content slot. Avoid adding a general-purpose variant or slot before a real website calls for it. Component props and design tokens can change as the first client site is assembled, so update this document and the showcase alongside any API change.
+
+`src/pages/starter.astro` is a complete fictional example site. It uses `SiteLayout` rather than the catalogue's `BaseLayout`, so it does not inherit the catalogue navigation. The `SiteHeader`, `Hero`, existing blocks and `SiteFooter` provide the complete page. The local SVG illustration and example quotes are explicitly sample content, and the contact form stays in demo mode. Replace the copy, quotes, links, illustration and favicon before using it as a real business site.

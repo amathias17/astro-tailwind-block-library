@@ -35,7 +35,9 @@ const features = [
 <CallToAction title="Talk to us" label="Get in touch" href="/contact/" />
 ```
 
-`/components/` demonstrates eight blocks: `FeatureGrid`, `ContentSplit`, `BlogGrid`, `PricingTable`, `Testimonials`, `ContactForm`, `CallToAction`, and `SiteFooter`. The three primitives are `Container`, `SectionHeading`, and `Button`. Read the [component API guide](docs/components.md) for props, usage examples and form limitations. The showcase contains sample copy, pricing and remote images. Replace them in a real site.
+`/components/` demonstrates the first eight blocks: `FeatureGrid`, `ContentSplit`, `BlogGrid`, `PricingTable`, `Testimonials`, `ContactForm`, `CallToAction`, and `SiteFooter`. `SiteHeader` and `Hero` are demonstrated by the complete `/starter/` page. The three primitives are `Container`, `SectionHeading`, and `Button`. Read the [component API guide](docs/components.md) for props, usage examples and form limitations. The showcase contains sample copy, pricing and remote images. Replace them in a real site.
+
+`/starter/` is a complete **fictional example site** assembled from `SiteHeader`, `Hero` and the reusable blocks. It has its own `SiteLayout`, so the 15-category catalogue navigation is not inherited. The content, testimonial quotes and local artwork are illustrative; the contact form is intentionally disabled. Copy the composition into a real project, then replace its copy and connect a working form service before publishing. See [`src/pages/starter.astro`](src/pages/starter.astro).
 
 ## Customise the visual system
 

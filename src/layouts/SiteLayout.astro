@@ -1,0 +1,19 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string; lang?: string }
+const { title, description, lang = 'en' } = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/images/studio-mark.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-surface text-ink antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-ui focus:bg-surface focus:px-4 focus:py-3 focus:text-ink focus:shadow-panel">Skip to content</a>
+    <slot />
+  </body>
+</html>

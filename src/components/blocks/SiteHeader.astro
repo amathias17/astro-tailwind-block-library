@@ -1,0 +1,45 @@
+---
+import Button from '../primitives/Button.astro';
+import Container from '../primitives/Container.astro';
+import type { HeaderLink, LinkAction } from './types';
+
+interface Props {
+  brand: string;
+  brandHref?: string;
+  links: HeaderLink[];
+  action?: LinkAction;
+  menuId?: string;
+}
+const { brand, brandHref = '/', links, action, menuId = 'site-menu' } = Astro.props;
+---
+<header data-starter-header class="relative z-20 border-b border-border bg-surface text-ink">
+  <Container class="flex min-h-18 flex-wrap items-center justify-between gap-4 py-3">
+    <a href={brandHref} class="inline-flex items-center gap-3 font-display text-xl font-bold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+      <span aria-hidden="true" class="h-6 w-6 rounded-full border-[6px] border-brand"></span>{brand}
+    </a>
+    <button type="button" data-starter-menu aria-expanded="false" aria-controls={menuId} aria-label="Open menu" class="rounded-ui border border-border px-3 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:hidden">
+      Menu <span aria-hidden="true" class="ml-1">☰</span>
+    </button>
+    <nav id={menuId} data-starter-nav aria-label="Site navigation" class="hidden w-full flex-col gap-1 border-t border-border pt-4 md:flex md:w-auto md:flex-row md:items-center md:gap-7 md:border-0 md:pt-0">
+      {links.map((link) => <a href={link.href} class="block py-2 text-sm font-medium text-body transition hover:text-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">{link.label}</a>)}
+      {action && <div class="mt-2 md:mt-0"><Button href={action.href} label={action.label} /></div>}
+    </nav>
+  </Container>
+</header>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-starter-header]').forEach((header) => {
+    const button = header.querySelector<HTMLButtonElement>('[data-starter-menu]');
+    const nav = header.querySelector<HTMLElement>('[data-starter-nav]');
+    if (!button || !nav) return;
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle('hidden', !open);
+      nav.classList.toggle('flex', open);
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setOpen(false); });
+    window.addEventListener('resize', () => { if (window.matchMedia('(min-width: 768px)').matches) setOpen(false); });
+  });
+</script>

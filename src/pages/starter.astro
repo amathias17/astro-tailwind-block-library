@@ -1,0 +1,47 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SiteHeader from '../components/blocks/SiteHeader.astro';
+import Hero from '../components/blocks/Hero.astro';
+import FeatureGrid from '../components/blocks/FeatureGrid.astro';
+import ContentSplit from '../components/blocks/ContentSplit.astro';
+import Testimonials from '../components/blocks/Testimonials.astro';
+import CallToAction from '../components/blocks/CallToAction.astro';
+import ContactForm from '../components/blocks/ContactForm.astro';
+import SiteFooter from '../components/blocks/SiteFooter.astro';
+import type { HeaderLink, FeatureItem, TestimonialItem } from '../components/blocks/types';
+
+const links: HeaderLink[] = [
+  { label: 'What we do', href: '#features' },
+  { label: 'Approach', href: '#approach' },
+  { label: 'Perspectives', href: '#voices' },
+  { label: 'Contact', href: '#contact' },
+];
+const features: FeatureItem[] = [
+  { title: 'Find the story', description: 'Start with what people need to understand, then give it a clear place on the page.', icon: '01' },
+  { title: 'Shape the experience', description: 'Use a considered hierarchy and flexible sections that serve the content.', icon: '02' },
+  { title: 'Keep it adaptable', description: 'Build from a small, consistent system that can change as the project grows.', icon: '03' },
+];
+const testimonials: TestimonialItem[] = [
+  { quote: 'The page feels intentional without being difficult to update.', name: 'Sample quote 01', role: 'Illustrative content' },
+  { quote: 'A clear structure made it easier to focus on the message.', name: 'Sample quote 02', role: 'Illustrative content' },
+  { quote: 'We could see how the pieces would grow with the project.', name: 'Sample quote 03', role: 'Illustrative content' },
+];
+---
+<SiteLayout title="Fieldnotes Studio | Example Astro Site" description="A complete example page built from reusable Astro and Tailwind components.">
+  <SiteHeader brand="Fieldnotes Studio" brandHref="/starter/" links={links} action={{ label: 'Browse blocks', href: '/' }} />
+  <main id="main-content">
+    <Hero
+      eyebrow="Example site, not a live service"
+      title="Make the complex feel a little clearer."
+      description="Thoughtful structure makes room for good ideas. This sample studio page shows how a handful of reusable blocks can become a complete site."
+      primary={{ label: 'See the approach', href: '#approach' }}
+      secondary={{ label: 'What we do', href: '#features' }}
+    />
+    <div id="features"><FeatureGrid eyebrow="What we do" title="What a good start looks like" description="Three principles, one coherent direction. The words and imagery are examples, ready to be replaced for your project." items={features} /></div>
+    <div id="approach"><ContentSplit eyebrow="The approach" title="Give every idea its proper place" description="A deliberate layout helps visitors find the details that matter. Swap the content, change the brand tokens, and keep the underlying composition." image="/images/studio-workflow.svg" imageAlt="Abstract illustration of layout decisions on a design board" action={{ label: 'View the component library', href: '/components/' }} /></div>
+    <div id="voices"><Testimonials title="Example testimonials" testimonials={testimonials} tone="light" /></div>
+    <CallToAction eyebrow="From reference to real site" title="Start with structure. Make it yours." description="Explore the catalogue for ideas, then compose a page with the reusable components." label="Explore the block library" href="/" tone="dark" />
+    <div id="contact"><ContactForm title="Contact preview" description="This form is intentionally disabled in the example. Connect a real endpoint and verify delivery before using it on a live site." mode="demo" /></div>
+  </main>
+  <SiteFooter brand="Fieldnotes Studio" brandHref="/starter/" description="A sample studio site assembled from reusable Astro components." links={[{ label: 'What we do', href: '#features' }, { label: 'Approach', href: '#approach' }, { label: 'Component library', href: '/components/' }]} />
+</SiteLayout>
